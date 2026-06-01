@@ -10,6 +10,12 @@
 
 航运大亨**方仲远**暴毙于华懋饭店顶层套房。房门自内闩死，钥匙在床头——密室已成。毒杀？头击？两重伤痕谁先谁后？六人之中，无人清白——而死着自己，也藏着一把未出鞘的刀。
 
+## 🌸 游戏截图
+
+<img width="2148" height="1756" alt="image" src="https://github.com/user-attachments/assets/a4d45a86-26ec-4f79-88ce-66acc951485a" />
+<img width="1608" height="1086" alt="image" src="https://github.com/user-attachments/assets/b08697c2-f14a-4c3d-8e73-6bce1e1cc9a4" />
+<img width="2084" height="1670" alt="image" src="https://github.com/user-attachments/assets/faf5e698-218b-4c8a-8e13-1de8b2524ca5" />
+
 ---
 
 ## ✨ 功能特性
