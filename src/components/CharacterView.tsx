@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CHARACTER_SCRIPTS, INVESTIGATION_LOCATIONS } from '../data/character-scripts';
+import { CASE_BACKGROUND_IMAGE, CHARACTER_IMAGES } from '../data/visual-assets';
 import { QuestionPanel } from './QuestionPanel';
 import { ActReader } from './ActReader';
 import { InvestigationPanel } from './InvestigationPanel';
@@ -145,7 +146,13 @@ export function CharacterView({ characterId, lockPin }: Props) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <div className="text-6xl mb-4">{script.avatar}</div>
+            <div className="h-40 w-32 overflow-hidden rounded-xl border border-sepia-light/20 shadow-xl">
+              <img
+                src={CHARACTER_IMAGES[characterId].url}
+                alt={CHARACTER_IMAGES[characterId].alt}
+                className="h-full w-full object-cover object-top"
+              />
+            </div>
             <h2 className="text-2xl font-title font-bold text-ink">{script.name}</h2>
             <p className="text-sepia-light text-sm font-body">你的角色锁定码</p>
             <div className="text-5xl font-game font-black text-burgundy tracking-[0.3em] select-all">
@@ -169,7 +176,13 @@ export function CharacterView({ characterId, lockPin }: Props) {
       {/* Header */}
       <div className="paper-card p-6">
         <div className="flex items-center gap-5">
-          <span className="text-5xl">{script.avatar}</span>
+          <div className="h-24 w-20 flex-shrink-0 overflow-hidden rounded-lg border border-sepia-light/15 bg-sepia-light/10">
+            <img
+              src={CHARACTER_IMAGES[characterId].url}
+              alt={CHARACTER_IMAGES[characterId].alt}
+              className="h-full w-full object-cover object-top"
+            />
+          </div>
           <div>
             <div className="flex items-center gap-3 mb-1">
               <h1 className="text-2xl font-title font-bold text-ink">{script.name}</h1>
@@ -319,6 +332,21 @@ export function CharacterView({ characterId, lockPin }: Props) {
       {/* Act reading */}
       {!investigationOpen && !showDiscussion && !showQuestions && !showVoting && !revealed && (
         <div className="space-y-4">
+          <div className="relative h-44 overflow-hidden rounded-xl border border-sepia-light/15">
+            <img
+              src={CASE_BACKGROUND_IMAGE.url}
+              alt={CASE_BACKGROUND_IMAGE.alt}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/30 to-transparent" />
+            <div className="relative z-10 flex h-full flex-col justify-end p-5">
+              <div className="text-[10px] font-ui tracking-[0.24em] text-brass/80">剧本背景</div>
+              <div className="mt-1 text-xl font-title font-bold tracking-wider text-cream">华懋饭店顶层夜宴</div>
+              <p className="mt-1 max-w-lg text-xs leading-relaxed text-cream/70">
+                外滩江风、密室门闩、碎杯与未说出口的旧债，构成这一夜所有角色的共同舞台。
+              </p>
+            </div>
+          </div>
           <div className="section-title text-base">📜 你的剧本</div>
 
           {allVisibleActs.map(act => {

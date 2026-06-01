@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { InvestigationLocation, DiscoverableClue, ClueItem } from '../types';
+import { LOCATION_IMAGES } from '../data/visual-assets';
 
 interface Props {
   characterId: string;
@@ -175,13 +176,22 @@ export function InvestigationPanel({ characterId, locations, rounds, onSearchClu
           {locations.map(loc => (
             <div
               key={loc.id}
-              className="p-3 border border-sepia-light/10 rounded bg-cream/40"
+              className="overflow-hidden border border-sepia-light/10 rounded bg-cream/40"
             >
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-lg">{loc.icon}</span>
-                <span className="text-xs font-title font-bold text-ink">{loc.name}</span>
+              <div className="h-24 overflow-hidden bg-sepia-light/10">
+                <img
+                  src={LOCATION_IMAGES[loc.id].url}
+                  alt={LOCATION_IMAGES[loc.id].alt}
+                  className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                />
               </div>
-              <p className="text-[9px] text-sepia-light/70 leading-relaxed line-clamp-2">{loc.description}</p>
+              <div className="p-3">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-lg">{loc.icon}</span>
+                  <span className="text-xs font-title font-bold text-ink">{loc.name}</span>
+                </div>
+                <p className="text-[9px] text-sepia-light/70 leading-relaxed line-clamp-2">{loc.description}</p>
+              </div>
             </div>
           ))}
         </div>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CASE_TITLE, CASE_SUBTITLE, CASE_BRIEF, PUBLIC_CASE_INFO, PUBLIC_CHARACTER_INFO, PUBLIC_TIMELINE } from '../data/character-scripts';
+import { CASE_BACKGROUND_IMAGE, CHARACTER_IMAGES } from '../data/visual-assets';
 
 interface Props {
   onSelectCharacter: (charId: string) => void;
@@ -28,12 +29,22 @@ export function CharacterSelect({ onSelectCharacter, onEnterHost }: Props) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="text-brass/40 text-xs tracking-[0.3em] font-ui mb-3">— 豪门惊情 · 分幕式剧本杀 —</div>
-        <h1 className="text-4xl md:text-5xl font-title font-black text-ink tracking-[0.12em] mb-2">
-          {CASE_TITLE}
-        </h1>
-        <p className="text-sepia-light text-sm font-ui tracking-wider">{CASE_SUBTITLE}</p>
-        <p className="text-sepia-light/60 text-xs font-body mt-2 italic">{CASE_BRIEF}</p>
+        <div className="relative overflow-hidden rounded-xl border border-sepia-light/15 min-h-[300px] flex items-end shadow-2xl shadow-sepia-light/10">
+          <img
+            src={CASE_BACKGROUND_IMAGE.url}
+            alt={CASE_BACKGROUND_IMAGE.alt}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/35 to-transparent" />
+          <div className="relative z-10 w-full p-6 md:p-8 text-left">
+            <div className="text-brass/80 text-xs tracking-[0.3em] font-ui mb-3">— 豪门惊情 · 分幕式剧本杀 —</div>
+            <h1 className="text-4xl md:text-5xl font-title font-black text-cream tracking-[0.12em] mb-2">
+              {CASE_TITLE}
+            </h1>
+            <p className="text-cream/80 text-sm font-ui tracking-wider">{CASE_SUBTITLE}</p>
+            <p className="text-cream/65 text-xs font-body mt-2 italic max-w-2xl">{CASE_BRIEF}</p>
+          </div>
+        </div>
       </motion.div>
 
       <motion.div
@@ -75,13 +86,19 @@ export function CharacterSelect({ onSelectCharacter, onEnterHost }: Props) {
               onClick={() => onSelectCharacter(char.id)}
               onMouseEnter={() => setSelectedPreview(char.id)}
               onMouseLeave={() => setSelectedPreview(null)}
-              className={`w-full text-left paper-card p-5 transition-all duration-300 cursor-pointer
+              className={`group w-full text-left paper-card p-5 transition-all duration-300 cursor-pointer
                 hover:border-burgundy/30 hover:shadow-lg
                 ${selectedPreview === char.id ? 'ring-2 ring-burgundy/20' : ''}
               `}
             >
               <div className="flex flex-col items-center text-center gap-2">
-                <span className="text-4xl">{char.avatar}</span>
+                <div className="h-32 w-full overflow-hidden rounded-md border border-sepia-light/10 bg-sepia-light/10">
+                  <img
+                    src={CHARACTER_IMAGES[char.id].url}
+                    alt={CHARACTER_IMAGES[char.id].alt}
+                    className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
                 <div>
                   <div className="font-title font-bold text-ink text-base">{char.name}</div>
                   <div className="text-xs text-sepia-light font-ui">{char.title} · {char.age}岁</div>
