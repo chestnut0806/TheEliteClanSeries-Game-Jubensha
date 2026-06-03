@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ZoomableImage } from './ZoomableImage';
 import { CHARACTER_SCRIPTS, INVESTIGATION_LOCATIONS } from '../data/character-scripts';
 import { CHARACTER_IMAGES, LOCATION_IMAGES } from '../data/visual-assets';
 import { CrimeMap } from './CrimeMap';
@@ -123,7 +124,7 @@ export function HostView({ onBack }: Props) {
                 } ${c.isCulprit ? 'ring-1 ring-vermilion/20' : ''}`}
               >
                 <span className="inline-flex items-center gap-1.5">
-                  <img src={CHARACTER_IMAGES[c.id].url} alt={CHARACTER_IMAGES[c.id].alt} className="h-5 w-4 rounded object-cover object-top" />
+                  <ZoomableImage src={CHARACTER_IMAGES[c.id].url} alt={CHARACTER_IMAGES[c.id].alt} className="h-5 w-4 rounded object-cover object-top" stopPropagation />
                   {c.name}
                 </span>
                 {c.isCulprit && <span className="ml-1 text-vermilion text-[9px]">真凶</span>}
@@ -136,7 +137,7 @@ export function HostView({ onBack }: Props) {
               <div className="paper-card p-5">
                 <div className="flex items-center gap-4">
                   <div className="h-20 w-16 overflow-hidden rounded-lg border border-sepia-light/15 bg-sepia-light/10">
-                    <img src={CHARACTER_IMAGES[char.id].url} alt={CHARACTER_IMAGES[char.id].alt} className="h-full w-full object-cover object-top" />
+                    <ZoomableImage src={CHARACTER_IMAGES[char.id].url} alt={CHARACTER_IMAGES[char.id].alt} className="h-full w-full object-cover object-top" />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
@@ -319,7 +320,7 @@ export function HostView({ onBack }: Props) {
             {INVESTIGATION_LOCATIONS.map(loc => (
               <div key={loc.id} className="mb-4">
                 <div className="mb-2 overflow-hidden rounded-lg border border-sepia-light/10">
-                  <img src={LOCATION_IMAGES[loc.id].url} alt={LOCATION_IMAGES[loc.id].alt} className="h-32 w-full object-cover" />
+                  <ZoomableImage src={LOCATION_IMAGES[loc.id].url} alt={LOCATION_IMAGES[loc.id].alt} className="h-32 w-full object-cover" />
                 </div>
                 <div className="text-sm font-title font-bold text-ink mb-1">{loc.icon} {loc.name}</div>
                 <p className="text-[10px] text-sepia-light/60 mb-2">{loc.description}</p>

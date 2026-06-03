@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { InvestigationLocation, DiscoverableClue, ClueItem } from '../types';
+import { ZoomableImage } from './ZoomableImage';
 import { LOCATION_IMAGES } from '../data/visual-assets';
 
 interface Props {
@@ -179,7 +180,7 @@ export function InvestigationPanel({ characterId, locations, rounds, onSearchClu
               className="overflow-hidden border border-sepia-light/10 rounded bg-cream/40"
             >
               <div className="h-24 overflow-hidden bg-sepia-light/10">
-                <img
+                <ZoomableImage
                   src={LOCATION_IMAGES[loc.id].url}
                   alt={LOCATION_IMAGES[loc.id].alt}
                   className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"

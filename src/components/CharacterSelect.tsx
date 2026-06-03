@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { ZoomableImage } from './ZoomableImage';
 import { CASE_TITLE, CASE_SUBTITLE, CASE_BRIEF, PUBLIC_CASE_INFO, PUBLIC_CHARACTER_INFO, PUBLIC_TIMELINE } from '../data/character-scripts';
 import { CASE_BACKGROUND_IMAGE, CHARACTER_IMAGES } from '../data/visual-assets';
 
@@ -30,7 +31,7 @@ export function CharacterSelect({ onSelectCharacter, onEnterHost }: Props) {
         transition={{ duration: 0.6 }}
       >
         <div className="relative overflow-hidden rounded-xl border border-sepia-light/15 min-h-[300px] flex items-end shadow-2xl shadow-sepia-light/10">
-          <img
+          <ZoomableImage
             src={CASE_BACKGROUND_IMAGE.url}
             alt={CASE_BACKGROUND_IMAGE.alt}
             className="absolute inset-0 h-full w-full object-cover"
@@ -82,32 +83,36 @@ export function CharacterSelect({ onSelectCharacter, onEnterHost }: Props) {
             whileHover={{ y: -4 }}
             className="relative"
           >
-            <button
-              onClick={() => onSelectCharacter(char.id)}
+            <div
               onMouseEnter={() => setSelectedPreview(char.id)}
               onMouseLeave={() => setSelectedPreview(null)}
-              className={`group w-full text-left paper-card p-5 transition-all duration-300 cursor-pointer
+              className={`group w-full text-left paper-card transition-all duration-300
                 hover:border-burgundy/30 hover:shadow-lg
                 ${selectedPreview === char.id ? 'ring-2 ring-burgundy/20' : ''}
               `}
             >
-              <div className="flex flex-col items-center text-center gap-2">
-                <div className="h-32 w-full overflow-hidden rounded-md border border-sepia-light/10 bg-sepia-light/10">
-                  <img
+              <div className="flex flex-col items-center text-center">
+                {/* 插画区域：独立于按钮，触摸/点击只放大 */}
+                <div className="h-32 w-full overflow-hidden rounded-md border border-sepia-light/10 bg-sepia-light/10 mb-2">
+                  <ZoomableImage
                     src={CHARACTER_IMAGES[char.id].url}
                     alt={CHARACTER_IMAGES[char.id].alt}
                     className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
-                <div>
+                {/* 文字区域：点击进入角色剧本 */}
+                <button
+                  onClick={() => onSelectCharacter(char.id)}
+                  className="w-full text-center cursor-pointer p-5 pt-0"
+                >
                   <div className="font-title font-bold text-ink text-base">{char.name}</div>
                   <div className="text-xs text-sepia-light font-ui">{char.title} · {char.age}岁</div>
-                </div>
-                <span className="text-[10px] font-ui px-2 py-0.5 rounded-full bg-burgundy/10 text-burgundy">
-                  {char.tag}
-                </span>
+                  <span className="inline-block mt-1 text-[10px] font-ui px-2 py-0.5 rounded-full bg-burgundy/10 text-burgundy">
+                    {char.tag}
+                  </span>
+                </button>
               </div>
-            </button>
+            </div>
           </motion.div>
         ))}
       </motion.div>

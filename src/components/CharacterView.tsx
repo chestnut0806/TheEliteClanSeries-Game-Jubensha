@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CHARACTER_SCRIPTS, INVESTIGATION_LOCATIONS } from '../data/character-scripts';
 import { CASE_BACKGROUND_IMAGE, CHARACTER_IMAGES } from '../data/visual-assets';
+import { ZoomableImage } from './ZoomableImage';
 import { QuestionPanel } from './QuestionPanel';
 import { ActReader } from './ActReader';
 import { InvestigationPanel } from './InvestigationPanel';
@@ -147,7 +148,7 @@ export function CharacterView({ characterId, lockPin }: Props) {
             exit={{ opacity: 0 }}
           >
             <div className="h-40 w-32 overflow-hidden rounded-xl border border-sepia-light/20 shadow-xl">
-              <img
+              <ZoomableImage
                 src={CHARACTER_IMAGES[characterId].url}
                 alt={CHARACTER_IMAGES[characterId].alt}
                 className="h-full w-full object-cover object-top"
@@ -177,7 +178,7 @@ export function CharacterView({ characterId, lockPin }: Props) {
       <div className="paper-card p-6">
         <div className="flex items-center gap-5">
           <div className="h-24 w-20 flex-shrink-0 overflow-hidden rounded-lg border border-sepia-light/15 bg-sepia-light/10">
-            <img
+            <ZoomableImage
               src={CHARACTER_IMAGES[characterId].url}
               alt={CHARACTER_IMAGES[characterId].alt}
               className="h-full w-full object-cover object-top"
@@ -333,7 +334,7 @@ export function CharacterView({ characterId, lockPin }: Props) {
       {!investigationOpen && !showDiscussion && !showQuestions && !showVoting && !revealed && (
         <div className="space-y-4">
           <div className="relative h-44 overflow-hidden rounded-xl border border-sepia-light/15">
-            <img
+            <ZoomableImage
               src={CASE_BACKGROUND_IMAGE.url}
               alt={CASE_BACKGROUND_IMAGE.alt}
               className="absolute inset-0 h-full w-full object-cover"
